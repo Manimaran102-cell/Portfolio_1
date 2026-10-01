@@ -1,0 +1,6 @@
+# verification screenshots and reports produced by the CDP test harnesses
+out/
+
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>K Manimaran — Full Stack Developer | MERN, 3D Web</title>
+<meta name="description" content="K Manimaran is a Full Stack Developer building production MERN systems — MongoDB, Express, React and Node — with interactive 3D on the web. 6 live applications shipped end to end.">
+<meta name="author" content="K Manimaran">
+<meta name="theme-color" content="#05060a">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://manimaran102-cell.github.io/">
+
+<!--
+  Contact form API. Point this at wherever portfolio-api is deployed, e.g.
+  https://portfolio-api.onrender.com/api  (leave the /api suffix off - the form
+  appends /messages itself). While it points at localhost the form still works
+  locally; if the API cannot be reached it falls back to opening a prefilled
+  email, so the form is never a dead end.
+-->
+<meta name="portfolio-api" content="http://localhost:5000/api">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="K Manimaran — Full Stack Developer">
+<meta property="og:description" content="Full Stack Developer turning manual workflows into automated MERN systems. 6 live applications, 3D web, 2 internships.">
+<meta property="og:url" content="https://manimaran102-cell.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="K Manimaran — Full Stack Developer">
+<meta name="twitter:description" content="Full Stack Developer building production MERN systems with interactive 3D on the web.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305060a'/%3E%3Ctext x='32' y='43' font-family='Segoe UI,Arial,sans-serif' font-size='30' font-weight='700' text-anchor='middle' fill='%2300e5c0'%3EKM%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="preload" href="assets/js/gl.js" as="script">
+</head>
+<body>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "K Manimaran",
+  "jobTitle": "Full Stack Developer",
+  "email": "mailto:manimarank900@gmail.com",
+  "telephone": "+91-9150209499",
+  "address": { "@type": "PostalAddress", "addressLocality": "Mannargudi", "addressRegion": "Tamil Nadu", "addressCountry": "IN" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "PRIST University (Deemed), Thanjavur" },
+  "url": "https://manimaran102-cell.github.io/",
+  "sameAs": [
+    "https://github.com/Manimaran102-cell",
+    "https://www.linkedin.com/in/manimaran-k-61b732315"
+  ],
+  "knowsAbout": [
+    "MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "TypeScript",
+    "RESTful API Design", "JWT Authentication", "Three.js", "React Three Fiber", "Next.js"
+  ]
+}
+</script>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- preloader -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__inner">
+    <div class="preloader__mark">KM</div>
+    <div class="preloader__bar"><i id="preloaderFill"></i></div>
+    <div class="preloader__meta">
+      <span>loading experience</span>
+      <span id="preloaderPct">0%</span>
+    </div>
+  </div>
+</div>
+
+<!-- scroll progress -->
+<div class="scrollbar" aria-hidden="true"><i id="scrollFill"></i></div>
+
+<!-- custom cursor (pointer-fine only, JS-enabled only) -->
+<div class="cursor" id="cursor" aria-hidden="true"><i></i><i></i></div>
+
+<!-- 3D layer -->
+<div class="stage" id="stage" aria-hidden="true">
+  <canvas id="gl"></canvas>
+  <div class="stage__vignette"></div>
+  <div class="netlabels" id="netLabels"></div>
+</div>
+<div class="stage-fallback" id="stageFallback" aria-hidden="true"></div>
+
+<header class="site-head" id="siteHead">
+  <div class="shell site-head__inner">
+    <a class="brand" href="#top" aria-label="K Manimaran — home">
+      <span class="brand__mark" aria-hidden="true">KM</span>
+      <span class="brand__text">K&nbsp;Manimaran</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="site-head__cta">
+      <a class="btn btn--ghost btn--sm" href="https://go.fliplink.me/view/3875FCB9-2146-47D4-A5E2-358430965B8F" target="_blank" rel="noopener">Resume</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- ====================================================== HERO -->
+  <section class="hero" id="hero">
+    <div class="shell hero__inner">
+      <p class="pill reveal">
+        <span class="pulse" aria-hidden="true"></span>
+        Open to Full Stack Developer roles
+      </p>
+
+      <h1 class="hero__title">
+        <span class="reveal" data-scramble>I build</span>
+        <span class="reveal" data-scramble>full-stack systems</span>
+        <span class="reveal grad" data-scramble>that actually ship.</span>
+      </h1>
+
+      <p class="hero__lede reveal">
+        I'm <strong>K Manimaran</strong> — a Full Stack Developer who replaces manual, paper-based
+        workflows with automated MERN applications. Six live products taken from database schema
+        to deployment on Vercel, Render and MongoDB Atlas, with interactive 3D on the front end.
+      </p>
+
+      <div class="hero__actions reveal">
+        <a class="btn btn--primary" href="https://go.fliplink.me/view/3875FCB9-2146-47D4-A5E2-358430965B8F" target="_blank" rel="noopener" data-magnetic>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Résumé
+        </a>
+        <a class="btn btn--ghost" href="#projects" data-magnetic>Explore the work</a>
+        <a class="btn btn--icon" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener" aria-label="GitHub profile" data-magnetic>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
+
+      <dl class="stats reveal">
+        <div class="stat"><dt>Live applications shipped</dt><dd data-count="6" data-suffix="">0</dd></div>
+        <div class="stat"><dt>Internships, retained twice</dt><dd data-count="2">0</dd></div>
+        <div class="stat"><dt>B.Tech CGPA</dt><dd data-count="8.0" data-decimals="1">0</dd></div>
+        <div class="stat"><dt>B.Tech graduating</dt><dd>2026</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>scroll</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- ====================================================== MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ====================================================== ABOUT -->
+  <section class="section" id="about">
+    <div class="shell">
+      <header class="sec-head reveal">
+        <p class="sec-head__idx">01 — About</p>
+        <h2 class="sec-head__title">I turn <span class="grad">manual processes</span> into working software.</h2>
+      </header>
+
+      <div class="about">
+        <div class="about__copy reveal">
+          <p>
+            I'm a Full Stack Developer who builds complete products rather than isolated screens.
+            My work usually starts with the same problem: a team losing hours to a paper register,
+            a spreadsheet that nobody trusts, or a front desk that has no way to know who is in the building.
+            I design the schema, expose a REST API, build the interface, and deploy the whole thing.
+          </p>
+          <p>
+            I'm fluent across the MERN stack — <strong>MongoDB</strong> for the data model,
+            <strong>Express</strong> for the API, <strong>React</strong> for the interface and
+            <strong>Node</strong> to tie it together — and I care about the parts most demos skip:
+            validation, role-based access control, loading and error states, and performance on a
+            mid-range phone. My flagship work also pushes into <strong>Three.js</strong> and
+            <strong>React Three Fiber</strong>, with a flat, fast fallback for devices that can't run it.
+          </p>
+          <p>
+            Two internships at Codebinds Technologies, both retained for follow-up work, and a
+            B.Tech in Computer Science from PRIST University with an 8.0 CGPA. I'm looking for a
+            Fresher / Entry-Level Full Stack role where I can keep shipping.
+          </p>
+        </div>
+
+        <aside class="about__card reveal" aria-label="Quick facts">
+          <h3>Quick facts</h3>
+          <ul class="facts">
+            <li><span>Role</span><b>Full Stack Developer</b></li>
+            <li><span>Stack</span><b>MERN + TypeScript</b></li>
+            <li><span>Focus</span><b>Scalable, user-first products</b></li>
+            <li><span>Database</span><b>MongoDB / Mongoose / Atlas</b></li>
+            <li><span>Auth</span><b>JWT + bcrypt + RBAC</b></li>
+            <li><span>Deploy</span><b>Vercel · Render · Atlas</b></li>
+            <li><span>Location</span><b>Mannargudi, Tamil Nadu</b></li>
+            <li><span>Status</span><b class="ok">Open to work</b></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== SKILLS -->
+  <section class="section section--skills" id="skills">
+    <div class="shell">
+      <header class="sec-head sec-head--center reveal">
+        <p class="sec-head__idx">02 — Toolkit</p>
+        <h2 class="sec-head__title">Skills, mapped as a <span class="grad">constellation</span>.</h2>
+        <p class="sec-head__sub">Hover the web to trace a cluster. Every node is a real tool from the résumé.</p>
+      </header>
+    </div>
+
+    <div class="shell shell--wide">
+      <div class="skills-grid" id="skillsGrid">
+
+        <article class="card skill reveal" data-color="102,148,255"
+                 data-skills="JavaScript (ES6+)|TypeScript|HTML5|CSS3|Tailwind CSS|Python">
+          <h3 class="skill__title">Languages</h3>
+          <p class="skill__hint">The syntax layer</p>
+          <ul class="chips">
+            <li>JavaScript (ES6+)</li><li>TypeScript</li><li>HTML5</li><li>CSS3</li><li>Tailwind CSS</li><li>Python</li>
+          </ul>
+        </article>
+
+        <article class="card skill reveal" data-color="15,224,199"
+                 data-skills="React.js|Next.js 14|React Three Fiber|Three.js|Bootstrap|jQuery|Motion|GSAP + ScrollTrigger|Lenis">
+          <h3 class="skill__title">Frontend &amp; 3D</h3>
+          <p class="skill__hint">Interfaces that move</p>
+          <ul class="chips">
+            <li>React.js</li><li>Next.js 14</li><li>React Three Fiber</li><li>Three.js</li>
+            <li>Bootstrap</li><li>jQuery</li><li>Motion</li><li>GSAP + ScrollTrigger</li><li>Lenis</li>
+          </ul>
+        </article>
+
+        <article class="card skill reveal" data-color="161,115,255"
+                 data-skills="Node.js|Express.js|MongoDB|Mongoose|RESTful API Design|JWT Authentication|Multer|bcrypt|Testing (Node test runner + Supertest)">
+          <h3 class="skill__title">Backend &amp; Database</h3>
+          <p class="skill__hint">Where the truth lives</p>
+          <ul class="chips">
+            <li>Node.js</li><li>Express.js</li><li>MongoDB</li><li>Mongoose</li><li>RESTful API Design</li>
+            <li>JWT Authentication</li><li>Multer</li><li>bcrypt</li><li>Node test runner + Supertest</li>
+          </ul>
+        </article>
+
+        <article class="card skill reveal" data-color="255,140,41"
+                 data-skills="React Native (Expo)|Responsive Design|CSS Grid|Flexbox|CSS Animations|WebGL">
+          <h3 class="skill__title">UI Engineering</h3>
+          <p class="skill__hint">Pixel work, on any screen</p>
+          <ul class="chips">
+            <li>React Native (Expo)</li><li>Responsive Design</li><li>CSS Grid</li><li>Flexbox</li>
+            <li>CSS Animations</li><li>WebGL</li>
+          </ul>
+        </article>
+
+        <article class="card skill reveal" data-color="255,84,148"
+                 data-skills="Vercel|Render|MongoDB Atlas|Postman|Git|GitHub|VS Code|Docker basics">
+          <h3 class="skill__title">Shipping &amp; Tooling</h3>
+          <p class="skill__hint">Design to production</p>
+          <ul class="chips">
+            <li>Vercel</li><li>Render</li><li>MongoDB Atlas</li><li>Postman</li>
+            <li>Git</li><li>GitHub</li><li>VS Code</li><li>Docker basics</li>
+          </ul>
+        </article>
+
+        <article class="card skill reveal" data-color="102,230,128"
+                 data-skills="Security (Helmet, rate limiting, CORS)|Nodemailer|Schema Design|Aggregation Pipelines|Indexing">
+          <h3 class="skill__title">Security &amp; Data</h3>
+          <p class="skill__hint">Not an afterthought</p>
+          <ul class="chips">
+            <li>Helmet, rate limiting, CORS</li><li>Nodemailer</li><li>Schema Design</li>
+            <li>Aggregation Pipelines</li><li>Indexing</li>
+          </ul>
+        </article>
+
+        <article class="card skill reveal" data-color="247,214,77"
+                 data-skills="Data Structures|DBMS|Operating Systems|Object-Oriented Programming|Mobile-First Design|Cross-Browser Compatibility|Agile / Scrum">
+          <h3 class="skill__title">Core Concepts</h3>
+          <p class="skill__hint">The fundamentals hold</p>
+          <ul class="chips">
+            <li>Data Structures</li><li>DBMS</li><li>Operating Systems</li><li>OOP</li>
+            <li>Mobile-First Design</li><li>Cross-Browser Compatibility</li><li>Agile / Scrum</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="shell">
+      <header class="sec-head reveal">
+        <p class="sec-head__idx">03 — Experience</p>
+        <h2 class="sec-head__title">Two internships. <span class="grad">Both retained.</span></h2>
+      </header>
+
+      <ol class="timeline">
+        <li class="tl reveal">
+          <div class="tl__marker" aria-hidden="true"><i></i></div>
+          <div class="tl__body card">
+            <p class="tl__when">Feb 2026 — Apr 2026</p>
+            <h3 class="tl__role">Full Stack Developer Intern</h3>
+            <p class="tl__org">Codebinds Technologies Pvt. Ltd. — Trichy, Tamil Nadu</p>
+            <ul class="tl__points">
+              <li>Developed and shipped <b>12+ responsive UI features</b> for client-facing web applications with HTML5, CSS3, JavaScript and React.js, improving page load speed by roughly <b>30%</b>.</li>
+              <li>Integrated <b>8+ RESTful API endpoints</b> and streamlined asynchronous data flows, cutting UI-related bug reports by about <b>20%</b> through deliberate loading and error states.</li>
+              <li>Built mobile-first interfaces across <b>5+ device breakpoints</b>, holding a seamless experience across every supported viewport.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <div class="tl__marker" aria-hidden="true"><i></i></div>
+          <div class="tl__body card">
+            <p class="tl__when">Aug 2024 — Aug 2024</p>
+            <h3 class="tl__role">Web Developer Intern</h3>
+            <p class="tl__org">Codebinds Technologies Pvt. Ltd. — Trichy, Tamil Nadu</p>
+            <ul class="tl__points">
+              <li>Built and deployed <b>10+ web application UI components</b> in HTML, CSS and JavaScript, reducing repeated development effort by about <b>15%</b> through reusable patterns.</li>
+              <li>Designed structured content layouts and reusable visual components, cutting page-build time by roughly <b>25%</b> for later features.</li>
+              <li>Worked alongside senior developers to keep <b>3+ client-facing modules</b> accessible and responsive across mobile and tablet.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ====================================================== PROJECTS -->
+  <section class="section" id="projects">
+    <div class="shell">
+      <header class="sec-head reveal">
+        <p class="sec-head__idx">04 — Selected work</p>
+        <h2 class="sec-head__title">Systems, not <span class="grad">screen mockups</span>.</h2>
+        <p class="sec-head__sub">Three production full-stack builds, plus five front-end projects. Open any case study for the architecture.</p>
+      </header>
+
+      <div class="filter reveal" role="group" aria-label="Filter projects">
+        <button class="chip-btn is-active" data-filter="all">All <span>8</span></button>
+        <button class="chip-btn" data-filter="fullstack">Full stack <span>3</span></button>
+        <button class="chip-btn" data-filter="3d">3D &amp; animation <span>1</span></button>
+        <button class="chip-btn" data-filter="frontend">Front end <span>4</span></button>
+      </div>
+
+      <div class="projects" id="projectsGrid">
+
+        <!-- 1 -->
+        <article class="card project reveal" data-tags="fullstack 3d" data-hue="268" data-tilt data-spot>
+          <div class="project__art has-shot">
+            <img class="project__shot" src="assets/img/projects/riyadvi.png" alt="Riyadvi company assessment website — dark and gold homepage" loading="lazy" decoding="async" width="1346" height="628">
+            <span class="project__idx" aria-hidden="true">01</span>
+          </div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag tag--hot">Full stack</span><span class="tag">3D</span><span>2026</span></p>
+            <h3 class="project__title">Riyadvi — Company Assessment Website</h3>
+            <p class="project__lede">
+              A full corporate site revamp that reframes Riyadvi as a technology partner. Six service
+              pages, ten case studies, a filterable blog, job openings, a six-step Business Health
+              Checkup with an instant score, job applications with résumé upload, and a protected
+              admin dashboard over a Node/Express API and MongoDB.
+            </p>
+            <ul class="stack">
+              <li>Next.js 14</li><li>React 18</li><li>TypeScript</li><li>Tailwind</li>
+              <li>Three.js</li><li>React Three Fiber</li><li>Drei</li><li>GSAP</li>
+              <li>ScrollTrigger</li><li>Lenis</li><li>Motion</li><li>Express</li>
+              <li>MongoDB</li><li>Mongoose</li><li>Multer</li><li>JWT</li><li>bcrypt</li>
+              <li>Zod</li><li>Supertest</li><li>Vercel</li><li>Render</li><li>Atlas</li>
+            </ul>
+            <div class="project__actions">
+              <button class="link" data-modal-open>Case study
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+              <a class="link" href="https://riyadvi-website-k6zn.vercel.app/" target="_blank" rel="noopener">Live
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </a>
+              <a class="link" href="https://github.com/Manimaran102-cell/Riyadvi_Website.git" target="_blank" rel="noopener">Repo
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="detail" hidden>
+            <h4>The problem</h4>
+            <p>The old site sold software. The revamp had to sell a point of view: Riyadvi as a technology and digital solutions partner, with a black-and-gold identity, real interactive 3D, and a backend that keeps every enquiry instead of losing it in an inbox.</p>
+            <h4>What visitors can do</h4>
+            <ul>
+              <li>Browse six services, each with its own page and its own 3D visual.</li>
+              <li>Explore ten portfolio case studies, including 3D device presentations.</li>
+              <li>Read the blog with search, categories and tags; filter job openings by department, designation and experience.</li>
+              <li>Book a consultation, send a contact enquiry, and download the Software Project Planning Guide.</li>
+              <li>Take the six-step Business Health Checkup and receive an instant readiness score.</li>
+              <li>Apply for a job with a résumé upload handled by the API.</li>
+            </ul>
+            <h4>What the company gets</h4>
+            <ul>
+              <li>Every form is validated and persisted in MongoDB.</li>
+              <li>A protected <code>/admin</code> dashboard with totals, search, status tracking and résumé downloads.</li>
+              <li>Optional e-mail notification on each submission via Nodemailer.</li>
+              <li>Content is edited from a single data file — services, projects, articles and jobs change without touching page code.</li>
+            </ul>
+            <h4>How it's built</h4>
+            <p>The Next.js frontend talks to a separate Node/Express API which owns all persistence in MongoDB. Phones get a lighter 3D scene, and any device that can't run WebGL receives a flat image instead of a broken canvas.</p>
+            <h4>Engineering notes</h4>
+            <p>The brief asked for at least four 3D and animation technologies. The project visibly uses seven: Three.js, React Three Fiber, Drei, GSAP, ScrollTrigger, Lenis and Motion. The backend carries 28 automated tests through Node's built-in test runner and Supertest. Claude generated the first version of the project; I reviewed it, restructured the API boundaries, fixed the auth and validation gaps, rewrote the admin permissions, and rebuilt the 3D performance path myself.</p>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card project reveal" data-tags="fullstack" data-hue="172" data-tilt data-spot>
+          <div class="project__art has-shot">
+            <img class="project__shot" src="assets/img/projects/glowup-salon.png" alt="GlowUp salon booking platform interface" loading="lazy" decoding="async" width="1316" height="641">
+            <span class="project__idx" aria-hidden="true">02</span>
+          </div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag tag--hot">Full stack</span><span>2026</span></p>
+            <h3 class="project__title">GlowUp — Salon Booking Platform</h3>
+            <p class="project__lede">
+              A five-app MERN platform where customers discover salons, pick a stylist and book a slot,
+              while salon owners, staff and platform admins each get their own dashboard — all reading
+              from one REST API, plus a React Native app for booking on the move.
+            </p>
+            <ul class="stack">
+              <li>Node.js</li><li>Express</li><li>MongoDB</li><li>Mongoose</li><li>JWT</li>
+              <li>React 18</li><li>React Router</li><li>Vite</li><li>Axios</li>
+              <li>React Native</li><li>Expo</li><li>React Navigation</li><li>HTML5</li><li>CSS3</li>
+            </ul>
+            <div class="project__actions">
+              <button class="link" data-modal-open>Case study
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+              <a class="link" href="https://salon-booking-platform-fawn.vercel.app" target="_blank" rel="noopener">Live
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </a>
+              <a class="link" href="https://github.com/Manimaran102-cell/Salon-Booking-Platform" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="detail" hidden>
+            <h4>Architecture</h4>
+            <ul>
+              <li><code>backend/</code> — Express + MongoDB REST API with JWT auth</li>
+              <li><code>customer-web/</code> — React (Vite) booking app</li>
+              <li><code>salon-dashboard/</code> — owner and staff dashboard</li>
+              <li><code>admin-dashboard/</code> — platform-wide administration</li>
+              <li><code>mobile-app/</code> — React Native (Expo) booking app</li>
+              <li><code>marketing-website/</code> — static landing page</li>
+            </ul>
+            <p>Four front-ends and one API. That was the central decision: every surface reads and writes through the same REST layer, so a booking made on the phone is visible to the salon dashboard without a single extra integration.</p>
+            <h4>User flows</h4>
+            <ul>
+              <li><b>Customer</b> — register, discover salons by location/category/rating, review services, staff, hours and reviews, then select service → stylist → date/time → confirm, and manage or cancel bookings.</li>
+              <li><b>Salon owner</b> — stats and revenue, CRUD on services with pricing and duration, staff management with specialties and working hours, appointment lifecycle (confirm → start → complete), and salon settings.</li>
+              <li><b>Admin</b> — platform-wide revenue and appointment breakdown, user activation, salon featuring, and moderation over all reviews.</li>
+            </ul>
+            <h4>Engineering decisions</h4>
+            <ul>
+              <li><b>Double-booking prevention</b> — appointments are checked for time overlap before creation using MongoDB queries that compare start and end windows.</li>
+              <li><b>Dynamic availability</b> — the server generates time slots from staff working hours, approved leave and existing appointments, so the client never invents a slot the salon can't honour.</li>
+              <li><b>Role-based access</b> — the JWT carries the user role and middleware enforces permissions per route; the front-end nav only hides what a role can't do.</li>
+              <li><b>Text search</b> — MongoDB text indexes over salon name and description.</li>
+              <li><b>Rating aggregation</b> — salon and staff ratings recompute through an aggregation pipeline whenever a review lands.</li>
+            </ul>
+            <h4>Security</h4>
+            <p>bcrypt password hashing, expiring JWTs, rate limiting at 200 requests per 15 minutes, Helmet.js headers, express-validator input patterns, explicit CORS configuration and role-gated routes. Secrets live in a local <code>.env</code> built from <code>.env.example</code> and are gitignored.</p>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card project reveal" data-tags="fullstack" data-hue="206" data-tilt data-spot>
+          <div class="project__art has-shot">
+            <img class="project__shot" src="assets/img/projects/gatekeep-visitor-pass.png" alt="Gatekeep visitor pass system front-desk screen" loading="lazy" decoding="async" width="1316" height="639">
+            <span class="project__idx" aria-hidden="true">03</span>
+          </div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag tag--hot">Full stack</span><span>2026</span></p>
+            <h3 class="project__title">Gatekeep — Visitor Pass System</h3>
+            <p class="project__lede">
+              A MERN replacement for a paper visitor register. Registration, employee approval,
+              check-in and check-out across three roles — Administrator, Receptionist and Employee —
+              with ten business rules enforced on the server and reporting for the front desk.
+            </p>
+            <ul class="stack">
+              <li>Node.js</li><li>Express</li><li>MongoDB</li><li>Mongoose</li><li>JWT</li>
+              <li>React</li><li>Vite</li><li>Axios</li><li>Role-based access control</li><li>Vercel</li><li>Render</li>
+            </ul>
+            <div class="project__actions">
+              <button class="link" data-modal-open>Case study
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+              <a class="link" href="https://visitor-pass-system-puqc-git-master-manimaran102-cells-projects.vercel.app" target="_blank" rel="noopener">Live
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </a>
+              <a class="link" href="https://github.com/Manimaran102-cell/visitor-pass-system" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="detail" hidden>
+            <h4>Why it exists</h4>
+            <p>The front desk kept a paper register. Nobody could search a visitor history, approvals were a phone call, and no one could answer "who is in the building right now". Gatekeep turns that into a system and cuts check-in time by roughly 40%.</p>
+            <h4>Roles &amp; permissions</h4>
+            <ul>
+              <li><b>Administrator</b> — full dashboard, manages employees and user accounts, sees all reports and the global activity feed.</li>
+              <li><b>Receptionist</b> — registers, checks in and checks out visitors, sees reports and their own desk activity.</li>
+              <li><b>Employee</b> — sees and acts on their own visit requests, approving or rejecting them with remarks.</li>
+            </ul>
+            <p>Every route is protected by <code>protect</code> (valid JWT) and <code>authorize(...roles)</code> middleware. The front-end nav hides what a role can't do, but the API is the actual enforcement point.</p>
+            <h4>Ten business rules, all server-side</h4>
+            <ul>
+              <li>A visitor cannot have more than one active visit (pending, approved or checked-in) at a time.</li>
+              <li>No duplicate registration for the same visitor on the same date.</li>
+              <li>Visit date cannot be before today; for same-day registrations arrival time cannot be in the past.</li>
+              <li>An employee cannot hold more than 3 pending requests at once.</li>
+              <li>Check-in requires prior approval.</li>
+              <li>A checked-in visitor cannot be checked in again until checked out.</li>
+              <li>Check-out time must be after check-in time.</li>
+              <li>Rejected requests can never be checked in.</li>
+              <li>Cancelled visits are excluded from active visitor lists.</li>
+            </ul>
+            <h4>Structure</h4>
+            <p>Backend is MVC-shaped: <code>models/</code> for Mongoose schemas, <code>controllers/</code> for business logic including every rule above, thin <code>routes/</code>, and <code>middleware/auth.js</code> for JWT verification and role gating. The React front-end groups pages per role under <code>src/pages/{admin,receptionist,employee}</code> and shares building blocks — VisitorTable, VisitorFilters, StatusBadge, Modal — from <code>src/components</code>. An AuthContext holds the session; the axios instance attaches the JWT and redirects to <code>/login</code> on 401.</p>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card project reveal" data-tags="frontend" data-hue="286" data-tilt data-spot>
+          <div class="project__art" aria-hidden="true"><span class="project__idx">04</span><span class="project__glyph">▮</span></div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag">React</span><span>2025</span></p>
+            <h3 class="project__title">Terminal-Themed Personal Portfolio</h3>
+            <p class="project__lede">
+              A deliberately distinctive portfolio with a custom cursor, scanline overlay and
+              scroll-reveal choreography, deployed on GitHub Pages and responsive across every device.
+            </p>
+            <ul class="stack"><li>React</li><li>CSS3</li><li>JavaScript</li><li>GitHub Pages</li></ul>
+            <div class="project__actions">
+              <a class="link" href="https://manimaran102-cell.github.io/Portfolio/" target="_blank" rel="noopener">Live
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </a>
+              <a class="link" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card project reveal" data-tags="frontend" data-hue="196" data-tilt data-spot>
+          <div class="project__art has-shot">
+            <img class="project__shot" src="assets/img/projects/weather-app.png" alt="Weather app interface showing current conditions" loading="lazy" decoding="async" width="1365" height="622">
+            <span class="project__idx" aria-hidden="true">05</span>
+          </div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag">React</span><span>API</span><span>2025</span></p>
+            <h3 class="project__title">Weather UI App</h3>
+            <p class="project__lede">
+              Real-time weather lookup with geolocation support and animated condition backgrounds,
+              driven by a live weather API and careful loading and error handling.
+            </p>
+            <ul class="stack"><li>React</li><li>OpenWeather API</li><li>CSS Animations</li><li>Geolocation API</li></ul>
+            <div class="project__actions">
+              <a class="link" href="https://manimaran102-cell.github.io/Weather-App/" target="_blank" rel="noopener">Live
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </a>
+              <a class="link" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card project reveal" data-tags="frontend" data-hue="34" data-tilt data-spot>
+          <div class="project__art has-shot">
+            <img class="project__shot" src="assets/img/projects/task-board.png" alt="Kanban task board with drag-and-drop columns" loading="lazy" decoding="async" width="1348" height="636">
+            <span class="project__idx" aria-hidden="true">06</span>
+          </div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag">React</span><span>State</span><span>2025</span></p>
+            <h3 class="project__title">Kanban Task Board</h3>
+            <p class="project__lede">
+              Drag-and-drop task board with persistent localStorage, a dark-mode toggle and clean
+              React state management — reducer-driven, with no Redux dependency.
+            </p>
+            <ul class="stack"><li>React</li><li>useReducer</li><li>Drag &amp; Drop</li><li>localStorage</li></ul>
+            <div class="project__actions">
+              <a class="link" href="https://manimaran102-cell.github.io/Task-board/" target="_blank" rel="noopener">Live
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </a>
+              <a class="link" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="card project reveal" data-tags="frontend" data-hue="330" data-tilt data-spot>
+          <div class="project__art" aria-hidden="true"><span class="project__idx">07</span><span class="project__glyph">◱</span></div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag">React</span><span>2025</span></p>
+            <h3 class="project__title">E-Commerce Storefront</h3>
+            <p class="project__lede">
+              A responsive online store with product listings, filtering, a persistent cart and a
+              checkout flow — built mobile-first from reusable React components.
+            </p>
+            <ul class="stack"><li>React</li><li>Context API</li><li>CSS Grid</li><li>Stripe</li></ul>
+            <div class="project__actions">
+              <a class="link" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="card project reveal" data-tags="frontend" data-hue="150" data-tilt data-spot>
+          <div class="project__art" aria-hidden="true"><span class="project__idx">08</span><span class="project__glyph">◐</span></div>
+          <div class="project__body">
+            <p class="project__meta"><span class="tag">React</span><span>Node.js</span><span>2025</span></p>
+            <h3 class="project__title">AI SaaS Landing &amp; Dashboard</h3>
+            <p class="project__lede">
+              A subscription-style SaaS app with an AI chat and generation demo, pricing tiers and a
+              dashboard shell designed to feel production-ready rather than like a tutorial.
+            </p>
+            <ul class="stack"><li>React</li><li>Node.js</li><li>OpenAI API</li><li>Tailwind CSS</li></ul>
+            <div class="project__actions">
+              <a class="link" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener">Code
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="projects__empty" id="projectsEmpty" hidden>Nothing in this category yet.</p>
+    </div>
+  </section>
+
+  <!-- ====================================================== EDUCATION + CERTS -->
+  <section class="section" id="education">
+    <div class="shell">
+      <header class="sec-head reveal">
+        <p class="sec-head__idx">05 — Education &amp; credentials</p>
+        <h2 class="sec-head__title">The base, and the <span class="grad">proof</span>.</h2>
+      </header>
+
+      <div class="edu-grid">
+        <ol class="timeline timeline--edu">
+          <li class="tl reveal">
+            <div class="tl__marker" aria-hidden="true"><i></i></div>
+            <div class="tl__body card">
+              <p class="tl__when">Nov 2022 — Apr 2026</p>
+              <h3 class="tl__role">B.Tech — Computer Science &amp; Engineering</h3>
+              <p class="tl__org">PRIST University (Deemed), Thanjavur, Tamil Nadu</p>
+              <p class="tl__note"><b>CGPA 8.0</b></p>
+              <p class="tl__text">Coursework: Data Structures · DBMS · Operating Systems · Web Technologies · Object-Oriented Programming. Focus on full-stack web development and responsive interface design.</p>
+            </div>
+          </li>
+          <li class="tl reveal">
+            <div class="tl__marker" aria-hidden="true"><i></i></div>
+            <div class="tl__body card">
+              <p class="tl__when">Completed 2022</p>
+              <h3 class="tl__role">Higher Secondary — Computer Science</h3>
+              <p class="tl__org">St. Joseph's School, Mannargudi</p>
+              <p class="tl__text">Computer Science stream with a strong grounding in programming fundamentals.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="certs">
+          <h3 class="certs__head reveal">Certifications</h3>
+          <article class="card cert reveal">
+            <div class="cert__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.2 13.9 7 22l5-3 5 3-1.2-8.1"/></svg>
+            </div>
+            <h4>Responsive Web Design</h4>
+            <p class="cert__issuer">freeCodeCamp · 2026</p>
+            <p class="cert__desc">300+ hours covering HTML5, CSS3, Flexbox, Grid and Mobile-First Design.</p>
+          </article>
+          <article class="card cert reveal">
+            <div class="cert__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg>
+            </div>
+            <h4>JavaScript Algorithms &amp; Data Structures</h4>
+            <p class="cert__issuer">freeCodeCamp · 2026</p>
+            <p class="cert__desc">ES6+, functional programming, object-oriented programming and complex algorithm challenges.</p>
+          </article>
+          <article class="card cert reveal">
+            <div class="cert__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h4>Front-End Development Libraries</h4>
+            <p class="cert__issuer">Issuer · Year</p>
+            <p class="cert__desc">Modern front-end toolchain — semantic markup, modern layout, component state, typed code and utility-first styling.</p>
+            <ul class="stack stack--tight">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li>
+              <li>React.js</li><li>TypeScript</li><li>Tailwind CSS</li>
+            </ul>
+          </article>
+          <article class="card cert reveal">
+            <div class="cert__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+            </div>
+            <h4>Backend Development &amp; APIs</h4>
+            <p class="cert__issuer">Issuer · Year</p>
+            <p class="cert__desc">Server-side design — REST resource modelling, validation, authentication, rate limiting and document data storage.</p>
+            <ul class="stack stack--tight">
+              <li>Node.js</li><li>Express.js</li><li>REST API</li><li>MongoDB</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== CONTACT -->
+  <section class="section section--contact" id="contact">
+    <div class="shell">
+      <div class="contact reveal">
+        <div class="contact__copy">
+          <p class="sec-head__idx">06 — Contact</p>
+          <h2 class="contact__title">Let's build something <span class="grad">that ships</span>.</h2>
+          <p class="contact__lede">
+            Open to Fresher and Entry-Level Full Stack Developer roles. If you're hiring and want to
+            see how I think about schema, API and interface, the fastest route is email — I answer
+            everything.
+          </p>
+          <a class="btn btn--primary" href="mailto:manimarank900@gmail.com" data-magnetic>manimarank900@gmail.com</a>
+        </div>
+
+        <ul class="contact__links">
+          <li>
+            <span>Email</span>
+            <a href="mailto:manimarank900@gmail.com" data-copy="manimarank900@gmail.com">manimarank900@gmail.com</a>
+          </li>
+          <li>
+            <span>Phone</span>
+            <a href="tel:+919150209499">+91 91502 09499</a>
+          </li>
+          <li>
+            <span>Location</span>
+            <b>Mannargudi, Tamil Nadu 614001</b>
+          </li>
+          <li>
+            <span>LinkedIn</span>
+            <a href="https://www.linkedin.com/in/manimaran-k-61b732315" target="_blank" rel="noopener">/in/manimaran-k</a>
+          </li>
+          <li>
+            <span>GitHub</span>
+            <a href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener">/Manimaran102-cell</a>
+          </li>
+          <li>
+            <span>Naukri</span>
+            <a href="https://www.naukri.com/mnjuser/homepage" target="_blank" rel="noopener">Profile</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-form-wrap reveal">
+        <form class="cform" id="contactForm" novalidate>
+          <p class="cform__intro">
+            Send a message straight to my inbox. No mail client, no third-party
+            form relay — it posts straight to an API I wrote and runs myself.
+          </p>
+
+          <div class="cform__row">
+            <div class="field">
+              <label class="field__label" for="cf-name">
+                Name <span class="field__req" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="field__input"
+                id="cf-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                minlength="2"
+                maxlength="80"
+                placeholder="Priya Raman"
+                aria-describedby="cf-name-err"
+              >
+              <p class="field__err" id="cf-name-err" data-err-for="cf-name"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="cf-email">
+                Email <span class="field__req" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="field__input"
+                id="cf-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                maxlength="160"
+                placeholder="you@company.com"
+                aria-describedby="cf-email-err"
+              >
+              <p class="field__err" id="cf-email-err" data-err-for="cf-email"></p>
+            </div>
+          </div>
+
+          <div class="cform__row">
+            <div class="field">
+              <label class="field__label" for="cf-topic">
+                Topic <span class="field__req" aria-hidden="true">*</span>
+              </label>
+              <div class="field__select">
+                <select class="field__input" id="cf-topic" name="topic" required aria-describedby="cf-topic-err">
+                  <option value="Full-time role">Full-time role</option>
+                  <option value="Freelance project">Freelance project</option>
+                  <option value="Collaboration">Collaboration</option>
+                  <option value="Something else" selected>Something else</option>
+                </select>
+              </div>
+              <p class="field__err" id="cf-topic-err" data-err-for="cf-topic"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="cf-company">
+                Company <span class="field__opt">optional</span>
+              </label>
+              <input
+                class="field__input"
+                id="cf-company"
+                name="company"
+                type="text"
+                autocomplete="organization"
+                maxlength="120"
+                placeholder="Where you're hiring from"
+              >
+              <p class="field__err" id="cf-company-err" data-err-for="cf-company"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="cf-message">
+              Message <span class="field__req" aria-hidden="true">*</span>
+            </label>
+            <textarea
+              class="field__input field__input--area"
+              id="cf-message"
+              name="message"
+              required
+              minlength="10"
+              maxlength="4000"
+              rows="5"
+              placeholder="Tell me about the role, the timeline, and what you need built."
+              aria-describedby="cf-message-err cf-message-count"
+            ></textarea>
+            <p class="field__err" id="cf-message-err" data-err-for="cf-message"></p>
+            <p class="field__count" id="cf-message-count" aria-live="off">0 / 4000</p>
+          </div>
+
+          <!-- bot trap: hidden from people, irresistible to naive bots -->
+          <div class="cform__trap" aria-hidden="true">
+            <label for="cf-website">Leave this field empty</label>
+            <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="cform__foot">
+            <button class="btn btn--primary cform__submit" type="submit" data-magnetic>
+              <span class="cform__submit-label">Send message</span>
+              <svg class="cform__submit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+            <p class="cform__status" id="cf-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <p class="cform__fallback" id="cf-fallback" hidden>
+            Could not reach the form API.
+            <a id="cf-mailto" href="mailto:manimarank900@gmail.com">Open this in your email app instead</a>.
+          </p>
+
+          <noscript>
+            <p class="cform__status cform__status--warn">
+              This form needs JavaScript. Email me directly at
+              <a href="mailto:manimarank900@gmail.com">manimarank900@gmail.com</a>.
+            </p>
+          </noscript>
+        </form>
+      </div>
+
+      <div class="cta-row reveal">
+        <a class="btn btn--primary" href="https://go.fliplink.me/view/3875FCB9-2146-47D4-A5E2-358430965B8F" target="_blank" rel="noopener" data-magnetic>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download full résumé
+        </a>
+        <a class="btn btn--ghost" href="https://github.com/Manimaran102-cell" target="_blank" rel="noopener" data-magnetic>See the code</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="shell site-foot__inner">
+    <p>Designed &amp; built by <strong>K Manimaran</strong> — hand-written WebGL, no 3D libraries.</p>
+    <p class="site-foot__meta"><span id="year">2026</span> · Mannargudi, India</p>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Back to top" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<!-- case study modal -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__backdrop" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <header class="modal__head">
+      <h3 id="modalTitle">Case study</h3>
+      <button class="modal__close" data-modal-close aria-label="Close case study">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+    <div class="modal__body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/gl.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
