@@ -14,6 +14,7 @@ const isProduction = process.env.NODE_ENV === "production";
 /** Origins allowed to submit the public contact form. */
 const allowedOrigins = [
   ...splitList(process.env.ALLOWED_ORIGINS),
+  "https://manimaran102-cell.github.io",
   // localhost on any port, for development
   ...(isProduction ? [] : [/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/]),
   // "null" is the origin Chrome reports for a page opened from disk (file://)

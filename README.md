@@ -20,6 +20,7 @@ This project acts as the central hub for my technical work, featuring detailed c
 ---
 
 ## 🌐 Links
-* **Live Portfolio:** [K Manimaran Portfolio](http://127.0.0.1:5500/)
+* **Live Portfolio:** [K Manimaran Portfolio](https://manimaran102-cell.github.io/)
+* **Portfolio API:** [Health check](https://portfolio-1-qyvr.onrender.com/api/health)
 * **GitHub Profile:** [Manimaran102-cell](https://github.com/Manimaran102-cell)
 * **LinkedIn:** [/in/manimaran-k](https://www.linkedin.com/in/manimaran-k/)
