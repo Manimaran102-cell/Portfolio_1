@@ -24,3 +24,19 @@ This project acts as the central hub for my technical work, featuring detailed c
 * **Portfolio API:** [Health check](https://portfolio-1-qyvr.onrender.com/api/health)
 * **GitHub Profile:** [Manimaran102-cell](https://github.com/Manimaran102-cell)
 * **LinkedIn:** [/in/manimaran-k](https://www.linkedin.com/in/manimaran-k/)
+
+## Contact Email Notifications
+
+The API stores each accepted portfolio message and sends an email notification when SMTP is configured. For Gmail, enable 2-Step Verification and create an App Password, then set these environment variables on the Render API service:
+
+```env
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-gmail-address@gmail.com
+SMTP_PASS=your-google-app-password
+MAIL_FROM=Portfolio <your-gmail-address@gmail.com>
+CONTACT_TO=manimarank900@gmail.com
+```
+
+Set `SMTP_PASS` directly in Render's Environment settings; do not commit credentials. Save the variables and redeploy. The API health check should then report `"emailEnabled": true`.
